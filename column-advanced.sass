@@ -1,0 +1,84 @@
+$column-space: 0.75rem !default
+
+// ------------------
+// group column
+.cols
+  margin: (-$column-space)
+  display: flex
+  flex-wrap: wrap
+
+  .col
+    float: none
+
+// cols modifiers
+.cols--center
+  justify-content: center
+.cols--vcenter
+  align-items: center
+.cols--border
+  margin: 0
+  padding: $column-space
+.cols--lines
+  flex-direction: column
+  padding: 0
+  margin: 0
+
+// cols modifiers : radius
+@for $i from 0 through 12
+  .cols--radius-#{$i}.cols, .cols--radius-#{$i} > .col
+    border-radius: (0.10rem * $i)
+
+// cols modifiers : marge in
+@for $i from 0 through 12
+  $col-marge-in: 0.10rem * $i
+  .cols--marge-in-#{$i}
+    & > .col
+      padding: $col-marge-in
+
+// cols modifiers : marge
+@for $i from 0 through 12
+  $column-marge: 0.10rem * $i
+  .cols--marge-#{$i}
+    margin: (-$column-marge)
+
+    &.cols--border
+      margin: 0
+      padding: $column-marge
+
+    & > .col
+      margin: $column-marge
+
+// ------------------
+// column
+.col
+  display: block
+  float: left
+  flex-basis: 0
+  flex-grow: 1
+  flex-shrink: 1
+  margin: $column-space
+
+=column-responsiver($name: '')
+  $dash: ''
+  @if $name != ''
+    $dash: '-'
+
+  +media($name)
+    .col--slim#{$dash}#{$name}
+      flex: none
+    @for $i from 1 through 12
+      .col--#{$i}#{$dash}#{$name}
+        flex: none
+        width: ($i / 12) * 100%
+      .col--offset-#{$i}#{$dash}#{$name}
+        margin-left: ($i / 12) * 100%
+
+// modifier
+.col--parent
+  // padding: 0 !important
+  margin: 0 !important
+
++column-responsiver()
+
+@each $media in $medias
+  +column-responsiver($media)

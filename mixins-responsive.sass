@@ -1,0 +1,31 @@
+
+=media($device)
+  @if $device == mobile
+    +mobile
+      @content
+  @else if $device == tablet
+    +tablet
+      @content
+  @else if $device == tablet-only
+    +tablet-only
+      @content
+  @else if $device == touch
+    +touch
+      @content
+  @else if $device == desktop
+    +desktop
+      @content
+  @else if $device == desktop-only
+    +desktop-only
+      @content
+  @else if $device == widescreen
+    +widescreen
+      @content
+  @else if $device == widescreen-only
+    +widescreen-only
+      @content
+  @else if $device == fullhd
+    +fullhd
+      @content
+  @else
+    @content
